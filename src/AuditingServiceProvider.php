@@ -1,6 +1,6 @@
 <?php
 
-namespace OwenIt\Auditing;
+namespace Roketin\Auditing;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Application as LaravelApp;
@@ -31,7 +31,7 @@ class AuditingServiceProvider extends ServiceProvider
      */
     protected function setupConfig(Application $app)
     {
-        $source = realpath(__DIR__.'/../config/auditing.php');
+        $source = realpath(__DIR__ . '/../config/auditing.php');
 
         if ($app instanceof LaravelApp && $app->runningInConsole()) {
             $this->publishes([$source => config_path('auditing.php')]);
@@ -47,7 +47,7 @@ class AuditingServiceProvider extends ServiceProvider
      */
     protected function setupMigrations(Application $app)
     {
-        $source = realpath(__DIR__.'/../database/migrations/');
+        $source = realpath(__DIR__ . '/../database/migrations/');
 
         if ($app instanceof LaravelApp && $app->runningInConsole()) {
             $this->publishes([$source => database_path('migrations')], 'migrations');

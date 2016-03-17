@@ -1,6 +1,6 @@
 <?php
 
-namespace OwenIt\Auditing;
+namespace Roketin\Auditing;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -170,7 +170,7 @@ class Log extends Model
     {
         preg_match_all('/\{[\w.| ]+\}/', $message, $segments);
         foreach (current($segments) as $segment) {
-            $s = str_replace(['{', '}'], '', $segment);
+            $s    = str_replace(['{', '}'], '', $segment);
             $keys = explode('|', $s);
 
             if (empty($keys[1]) && isset($keys[2])) {

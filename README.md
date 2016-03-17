@@ -1,28 +1,28 @@
 
-[![Latest Stable Version](https://poser.pugx.org/owen-it/laravel-auditing/version)](https://packagist.org/packages/owen-it/laravel-auditing)
-[![Total Downloads](https://poser.pugx.org/owen-it/laravel-auditing/downloads)](https://packagist.org/packages/owen-it/laravel-auditing)
-[![Latest Unstable Version](https://poser.pugx.org/owen-it/laravel-auditing/v/unstable)](//packagist.org/packages/owen-it/laravel-auditing)
-[![License](https://poser.pugx.org/owen-it/laravel-auditing/license.svg)](https://packagist.org/packages/owen-it/laravel-auditing)
+[![Latest Stable Version](https://poser.pugx.org/roketin/laravel-auditing/version)](https://packagist.org/packages/roketin/laravel-auditing)
+[![Total Downloads](https://poser.pugx.org/roketin/laravel-auditing/downloads)](https://packagist.org/packages/roketin/laravel-auditing)
+[![Latest Unstable Version](https://poser.pugx.org/roketin/laravel-auditing/v/unstable)](//packagist.org/packages/roketin/laravel-auditing)
+[![License](https://poser.pugx.org/roketin/laravel-auditing/license.svg)](https://packagist.org/packages/roketin/laravel-auditing)
 
 Laravel Auditing allows you to record changes to an Eloquent model's set of data by simply adding its trait to your model. Laravel Auditing also provides a simple interface for retreiving an audit trail for a piece of data and allows for a great deal of customization in how that data is provided.
 
-> Auditing is based on the package [auditing](https://packagist.org/packages/owen-it/laravel-auditing)
+> Auditing is based on the package [auditing](https://packagist.org/packages/roketin/laravel-auditing)
 
 ## Installation
 
-Laravel Auditing can be installed with [Composer](http://getcomposer.org/doc/00-intro.md), more details about this package in Composer can be found [here](https://packagist.org/packages/owen-it/laravel-auditing).
+Laravel Auditing can be installed with [Composer](http://getcomposer.org/doc/00-intro.md), more details about this package in Composer can be found [here](https://packagist.org/packages/roketin/laravel-auditing).
 
 Run the following command to get the latest version package:
 
 ```
-composer require owen-it/laravel-auditing
+composer require roketin/laravel-auditing
 ```
 Open the file ```config/app.php``` and then add the service provider, this step is required.
 
 ```php
 'providers' => [
     // ...
-    OwenIt\Auditing\AuditingServiceProvider::class,
+    Roketin\Auditing\AuditingServiceProvider::class,
 ],
 ```
 
@@ -31,7 +31,7 @@ Open the file ```config/app.php``` and then add the service provider, this step 
 Only after complete the step before, use the following command to publish configuration settings:
 
 ```
-php artisan vendor:publish --provider="OwenIt\Auditing\AuditingServiceProvider"
+php artisan vendor:publish --provider="Roketin\Auditing\AuditingServiceProvider"
 ```
 Finally, execute the migration to create the ```logs``` table in your database. This table is used to save audit the logs.
 
@@ -62,7 +62,7 @@ To register the change log, use the trait `OwnerIt\Auditing\AuditingTrait` in th
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\AuditingTrait;
+use Roketin\Auditing\AuditingTrait;
 
 class Team extends Model 
 {
@@ -80,7 +80,7 @@ It is also possible to have your model extend the `OwnerIt\Auditing\Auditing` cl
 // app/Team.php
 namespace App;
 
-use OwenIt\Auditing\Auditing;
+use Roketin\Auditing\Auditing;
 
 class Team extends Auditing 
 {
@@ -107,7 +107,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model 
 {
-    use OwenIt\Auditing\AuditingTrait;
+    use Roketin\Auditing\AuditingTrait;
     // Disables the log record in this model.
     protected $auditEnabled  = false;
     // Disables the log record after 500 records.
@@ -165,7 +165,7 @@ class MyAppController extends BaseController
 ```
 Getting logs with user responsible for the change.
 ```php
-use OwenIt\Auditing\Log;
+use Roketin\Auditing\Log;
 
 $logs = Log::with(['user'])->get();
 
@@ -197,7 +197,7 @@ Set messages to the model
 // app/Team.php
 namespace App;
 
-use OwenIt\Auditing\Auditing;
+use Roketin\Auditing\Auditing;
 
 class Team extends Auditing 
 {
@@ -273,19 +273,19 @@ Result:
 ## Examples
 
 ##### Spark Auditing
-For convenience we decided to use the [spark](https://github.com/laravel/spark) for this example, the demonstration of auditing is simple and self explanatory. [Click here](https://github.com/owen-it/spark-auditing) and see for yourself.
+For convenience we decided to use the [spark](https://github.com/laravel/spark) for this example, the demonstration of auditing is simple and self explanatory. [Click here](https://github.com/roketin/spark-auditing) and see for yourself.
 
 ##### Dreams
 Dreams is a developed api to serve as an example or direction for developers using laravel-auditing. You can access the application [here](https://dreams-.herokuapp.com). The back-end (api) was developed in laravel 5.1 and the front-end (app) in angularjs, the detail are these:
 
 * [Link for application](https://dreams-.herokuapp.com) 
-* [Source code api-dreams](https://github.com/owen-it/api-dreams)
-* [Source code app-dreams](https://github.com/owen-it/app-dreams)
+* [Source code api-dreams](https://github.com/roketin/api-dreams)
+* [Source code app-dreams](https://github.com/roketin/app-dreams)
 
 <a name="contributing"></a>
 ## Contributing
 
-Contributions are welcomed; to keep things organized, all bugs and requests should be opened on github issues tab for the main project in the [owen-it/laravel-auditing/issues](https://github.com/owen-it/laravel-auditing/issues).
+Contributions are welcomed; to keep things organized, all bugs and requests should be opened on github issues tab for the main project in the [roketin/laravel-auditing/issues](https://github.com/roketin/laravel-auditing/issues).
 
 All pull requests should be made to the branch Develop, so they can be tested before being merged into the master branch.
 
@@ -294,7 +294,7 @@ All pull requests should be made to the branch Develop, so they can be tested be
 
 If you are having problems with the use of this package, there is likely someone has faced the same problem. You can find common answers to their problems:
 
-* [Github Issues](https://github.com/owen-it/laravel-auditing/issues?page=1&state=closed)
+* [Github Issues](https://github.com/roketin/laravel-auditing/issues?page=1&state=closed)
 
 <a name="license"></a>
 ### License

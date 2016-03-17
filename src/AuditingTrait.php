@@ -1,6 +1,6 @@
 <?php
 
-namespace OwenIt\Auditing;
+namespace Roketin\Auditing;
 
 trait AuditingTrait
 {
