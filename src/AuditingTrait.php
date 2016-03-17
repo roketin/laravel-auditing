@@ -106,7 +106,7 @@ trait AuditingTrait
     {
         if (!isset($this->auditEnabled) || $this->auditEnabled) {
             $this->originalData = $this->original;
-            $this->updatedData = $this->attributes;
+            $this->updatedData  = $this->attributes;
 
             foreach ($this->updatedData as $key => $val) {
                 if (gettype($val) == 'object' && !method_exists($val, '__toString')) {
@@ -118,13 +118,13 @@ trait AuditingTrait
 
             // Dont keep log of
             $this->dontKeep = isset($this->dontKeepLogOf) ?
-                $this->dontKeepLogOf + $this->dontKeep
-                : $this->dontKeep;
+            $this->dontKeepLogOf + $this->dontKeep
+            : $this->dontKeep;
 
             // Keep log of
             $this->doKeep = isset($this->keepLogOf) ?
-                $this->keepLogOf + $this->doKeep
-                : $this->doKeep;
+            $this->keepLogOf + $this->doKeep
+            : $this->doKeep;
 
             unset($this->attributes['dontKeepLogOf']);
             unset($this->attributes['keepLogOf']);
@@ -155,7 +155,7 @@ trait AuditingTrait
         }
 
         if (((!isset($this->auditEnabled) || $this->auditEnabled)) && (!$LimitReached || $LogCleanup)) {
-            $log = ['old_value' => null];
+            $log              = ['old_value' => null];
             $log['new_value'] = [];
 
             foreach ($this->updatedData as $key => $value) {
@@ -243,6 +243,7 @@ trait AuditingTrait
             'owner_type' => get_class($this),
             'owner_id'   => $this->getKey(),
             'user_id'    => $this->getUserId(),
+            'company_id' => $this->getCompanyId(),
             'type'       => $type,
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
@@ -261,6 +262,23 @@ trait AuditingTrait
         try {
             if (\Auth::check()) {
                 return \Auth::user()->getAuthIdentifier();
+            }
+        } catch (\Exception $e) {
+            return;
+        }
+    }
+
+    /**
+     * For Roketin Apps
+     * Get company id.
+     *
+     * @return null
+     */
+    protected function getCompanyId()
+    {
+        try {
+            if (\Auth::check()) {
+                return !is_null($this->company) ? $this->company->id : 0;
             }
         } catch (\Exception $e) {
             return;
@@ -333,8 +351,8 @@ trait AuditingTrait
     public function isTypeAuditable($key)
     {
         $auditableTypes = isset($this->auditableTypes)
-                          ? $this->auditableTypes
-                          : ['created', 'saved', 'deleted'];
+        ? $this->auditableTypes
+        : ['created', 'saved', 'deleted'];
 
         // Checks if the type is in the collection of type-auditable
         if (in_array($key, $auditableTypes)) {
